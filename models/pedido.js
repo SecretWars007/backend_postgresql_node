@@ -21,5 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Pedido',
   });
+  
+  Pedido.associate = (models) =>{
+    Pedido.belongsTo(models.Cliente, { foreignKey:"clienteId"});
+  };
+
   return Pedido;
 };
