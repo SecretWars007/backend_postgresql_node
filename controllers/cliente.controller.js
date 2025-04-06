@@ -12,7 +12,7 @@ exports.crearCliente = async (req, res) => {
 // buscar un cliente por id
 exports.obtenerClientePorId = async (req, res) => {
   try {
-    const cliente = await Cliente.findOne({ id: req.params.id });;
+    const cliente = await Cliente.findByPk(req.params.id);
     if (!cliente) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }
@@ -25,11 +25,11 @@ exports.obtenerClientePorId = async (req, res) => {
 // Eliminar un cliente
 exports.eliminarCliente = async (req, res) => {
   try {
-    const clienteEliminado = await Cliente.findOne({id: req.params.id});
-    if (!clienteEliminado) {
+    const cliente = await Cliente.findByPk(req.params.id);
+    if (!cliente) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }
-    await clienteEliminado.destroy();
+    await cliente.destroy();
     res.json({ message: "Cliente eliminado" });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -38,7 +38,7 @@ exports.eliminarCliente = async (req, res) => {
 // Actualizar un cliente
 exports.actualizarCliente = async (req, res) => {
   try {
-    const cliente = await Cliente.findOne({ id: req.params.id });
+    const cliente = await Cliente.findByPk(req.params.id);
     if (!cliente) {
       return res.status(404).json({ message: "Cliente no encontrado" });
     }

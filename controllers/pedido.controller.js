@@ -12,7 +12,7 @@ exports.crearPedido = async (req, res) => {
 // Obtener pedido por id
 exports.obtenerPedidoPorId = async (req, res) => {
   try {
-    const pedido = await Pedido.findOne({ id: req.params.id });;
+    const pedido = await Pedido.findByPk(req.params.id);
     if (!pedido) {
       return res.status(404).json({ message: "Pedido no encontrado" });
     }
@@ -24,7 +24,7 @@ exports.obtenerPedidoPorId = async (req, res) => {
 // Eliminar un pedido
 exports.eliminarPedido = async (req, res) => {
   try {
-    const pedido = await Pedido.findOne({id: req.params.id});
+    const pedido = await Pedido.findByPk(req.params.id);
     if (!pedido) {
       return res.status(404).json({ message: "Pedido no encontrado" });
     }
@@ -37,7 +37,7 @@ exports.eliminarPedido = async (req, res) => {
 // Actualizar un pedido
 exports.actualizarPedido = async (req, res) => {
   try {
-    const pedido = await Pedido.findOne({ id: req.params.id });
+    const pedido = await Pedido.findByPk(req.params.id);
     if (!pedido) {
       return res.status(404).json({ message: "Pedido no encontrado" });
     }
